@@ -35,8 +35,6 @@ import Data.Time.LocalTime
 import Data.Time.Format
 import Data.Time.LocalTime.TimeZone.Olson
 import Data.Time.LocalTime.TimeZone.Series
-
-import System.Locale (TimeLocale)
 #else
 import System.IO
 import Plugins.Date

@@ -20,7 +20,7 @@ module Plugins.Date (Date(..)) where
 
 import Plugins
 
-import System.Locale
+import System.Locale hiding (defaultTimeLocale)
 import Data.Time
 
 data Date = Date String String Int

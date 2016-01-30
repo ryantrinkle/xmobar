@@ -19,7 +19,7 @@ module Localize
     ) where
 
 import Foreign.C
-import qualified System.Locale as L
+import qualified Data.Time.Format as L
 
 #ifdef UTF8
 import Codec.Binary.UTF8.String

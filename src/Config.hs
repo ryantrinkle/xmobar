@@ -75,7 +75,7 @@ data Config =
            , alignSep :: String     -- ^ Separators for left, center and
                                     --   right text alignment
            , template :: String     -- ^ The output template
-           } deriving (Read)
+           } deriving (Read, Show)
 
 data XPosition = Top
                | TopW Align Int
@@ -87,9 +87,9 @@ data XPosition = Top
                | BottomSize Align Int Int
                | Static {xpos, ypos, width, height :: Int}
                | OnScreen Int XPosition
-                 deriving ( Read, Eq )
+                 deriving ( Read, Show, Eq )
 
-data Align = L | R | C deriving ( Read, Eq )
+data Align = L | R | C deriving ( Read, Show, Eq )
 
 data Border = NoBorder
             | TopB
@@ -98,7 +98,7 @@ data Border = NoBorder
             | TopBM Int
             | BottomBM Int
             | FullBM Int
-              deriving ( Read, Eq )
+              deriving ( Read, Show, Eq )
 
 -- | The default configuration values
 defaultConfig :: Config

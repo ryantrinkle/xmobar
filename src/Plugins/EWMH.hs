@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -w #-}
-{-# LANGUAGE CPP, RecordWildCards, NamedFieldPuns, GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE CPP, RecordWildCards, NamedFieldPuns, GeneralizedNewtypeDeriving, FlexibleContexts #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -176,7 +176,7 @@ clientHandlers = [ ("_NET_WM_NAME", updateName)
                  , ("_NET_WM_DESKTOP", updateDesktop) ]
 
 newtype M a = M (ReaderT EwmhConf (StateT EwmhState IO) a)
-    deriving (Monad, Functor, MonadIO, MonadReader EwmhConf, MonadState EwmhState)
+    deriving (Monad, Applicative, Functor, MonadIO, MonadReader EwmhConf, MonadState EwmhState)
 
 execM :: M a -> IO a
 execM (M m) = do

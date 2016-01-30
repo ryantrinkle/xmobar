@@ -15,6 +15,7 @@
 module Plugins.Monitors.MPD ( mpdConfig, runMPD, mpdWait, mpdReady ) where
 
 import Data.List
+import Data.Maybe
 import Plugins.Monitors.Common
 import System.Console.GetOpt
 import qualified Network.MPD as M
@@ -71,7 +72,7 @@ mpdReady _ = do
     -- Only cases where MPD isn't responding is an issue; bogus information at
     -- least won't hold xmobar up.
     Left M.NoMPD    -> return False
-    Left M.TimedOut -> return False
+--    Left M.TimedOut -> return False
     Left _          -> return True
 
 mopts :: [String] -> IO MOpts
@@ -90,8 +91,8 @@ parseMPD (Right st) song opts = do
   where s = M.stState st
         ss = show s
         si = stateGlyph s opts
-        vol = int2str $ M.stVolume st
-        (p, t) = M.stTime st
+        vol = maybe "0" int2str $ M.stVolume st
+        (p, t) = fromMaybe (0, 0) $ M.stTime st
         [lap, len, remain] = map showTime [floor p, t, max 0 (t - floor p)]
         b = if t > 0 then realToFrac $ p / fromIntegral t else 0
         plen = int2str $ M.stPlaylistLength st
